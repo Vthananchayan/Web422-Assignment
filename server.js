@@ -27,14 +27,6 @@ app.use(cors());
 // Add support for incoming JSON entities
 app.use(express.json());
 
-db.initialize(process.env.MONGODB_CONN_STRING).then(()=>{
-    app.listen(HTTP_PORT, ()=>{
-        console.log(`server listening on: ${HTTP_PORT}`);
-    });
-}).catch((err)=>{
-    console.log(err);
-});
-
 // Deliver the app's home page to browser clients
 app.get('/', (req, res) => {
     res.json({message: "API Listening","term": "Summer 2025", "student": "[Vithursh Thananchayan]"});
@@ -116,5 +108,13 @@ app.use((req, res) => {
 
 // Tell the app to start listening for requests
 app.listen(HTTP_PORT, () => {
+    db.initialize(process.env.MONGODB_CONN_STRING).then(() => {
+        app.listen(HTTP_PORT, () => {
+            console.log(`server listening on: ${HTTP_PORT}`);
+        });
+        }).catch((err) => {
+            console.error("Failed to initialize database:", err);
+            process.exit(1); // Exit with failure
+        });
   console.log('Ready to handle requests on port ' + HTTP_PORT);
 });
