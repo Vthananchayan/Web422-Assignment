@@ -32,6 +32,9 @@ module.exports = class SitesDB {
   }
 
   getAllSites(page, perPage, name, region, provinceOrTerritoryName ) {
+    if (!this.Site) { 
+      throw new Error("Database not initialized");
+    }
 
     let findBy = {};
     if (region) {
