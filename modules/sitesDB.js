@@ -23,6 +23,9 @@ module.exports = class SitesDB {
   }
 
   async addNewSite(data) {
+    if (!this.Site) { 
+      throw new Error("Database not initialized");
+    }
     const newSite = new this.Site(data);
     await newSite.save();
     return newSite;

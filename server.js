@@ -1,3 +1,17 @@
+/********************************************************************************
+* WEB422 – Assignment 1
+*
+* I declare that this assignment is my own work in accordance with Seneca's
+* Academic Integrity Policy:
+*
+* https://www.senecapolytechnic.ca/about/policies/academic-integrity-policy.html
+*
+* Name: __Vithursh Thananchayan_ Student ID: ___116751231__ Date: ___05/17/25___
+*
+* Published URL on Vercel: https://web422-assignment-wine.vercel.app/
+*
+********************************************************************************/
+
 // Setup
 require('dotenv').config();
 const express = require('express');
