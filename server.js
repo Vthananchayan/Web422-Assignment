@@ -6,7 +6,7 @@
 *
 * https://www.senecapolytechnic.ca/about/policies/academic-integrity-policy.html
 *
-* Name: __Vithursh Thananchayan_ Student ID: ___116751231__ Date: ___05/17/25___
+* Name: __Vithursh Thananchayan_ Student ID: ___116751231__ Date: ___05/20/25___
 *
 * Published URL on Vercel: https://web422-assignment-wine.vercel.app/
 *
@@ -109,16 +109,12 @@ app.use((req, res) => {
 db.initialize(process.env.MONGODB_CONN_STRING)
   .then(() => {
     app.listen(HTTP_PORT, () => {
-      console.log(`server listening on: ${HTTP_PORT}`);
+        console.log('Ready to handle requests on port ' + HTTP_PORT);
+        console.log(`Server listening on: ${HTTP_PORT}`);
     });
-    // console.log('Ready to handle requests on port ' + HTTP_PORT);
   })
   .catch((err) => {
-    console.error("Failed to initialize database:", err);
-    process.exit(1); // Exit with failure
-  });
-
-// Tell the app to start listening for requests
-app.listen(HTTP_PORT, () => {
-    console.log('Ready to handle requests on port ' + HTTP_PORT);
+    console.error("Database connection error:", err.message);
+    console.error("Connection string:", process.env.MONGODB_CONN_STRING ? "Set" : "Not set");
+    process.exit(1);
 });
