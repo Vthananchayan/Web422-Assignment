@@ -49,7 +49,11 @@ app.post('/api/sites', (req, res) => {
 app.get('/api/sites', (req, res) => {
     db.getAllSites(req.query.page, req.query.perPage, req.query.name, req.query.region, req.query.provinceOrTerritoryName)
     .then((data) => {
-        res.json({ message: 'Fetched all items successfully', data });
+        if (Array.isArray(data) && data.length > 0) {
+            res.json({ message: 'Fetched all items successfully', data });
+        } else if (Array.isArray(data) && data.length === 0) {
+            res.status(404).json({ message: 'No sites found matching the criteria' });
+        }
     })
     .catch(error => {
         res.status(500).json({ message: error.message });
